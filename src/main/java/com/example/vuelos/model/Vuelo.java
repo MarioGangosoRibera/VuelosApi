@@ -23,7 +23,7 @@ public class Vuelo {
     private Integer numeroescalas;
 
     @ManyToOne
-    @JoinColumn(name = "idcompañia")
+    @JoinColumn(name = "idcompania")
     private Compania compania;
 
     public Vuelo() {
