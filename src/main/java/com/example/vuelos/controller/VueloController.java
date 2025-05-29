@@ -2,10 +2,7 @@ package com.example.vuelos.controller;
 
 import com.example.vuelos.model.Vuelo;
 import com.example.vuelos.repository.VueloRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,12 @@ public class VueloController {
     }
      */
 
+    @GetMapping("/todos")
+    public List<Vuelo> obtenerTodosLosVuelos(){
+        return vueloRepository.findAll();
+    }
+
+    //Metodo para buscar pero pasanado los campos por la url ?origen=MADRID&destino=LOS%20ANGELES&numEscalas=3
     @GetMapping("/buscar")
     public List<Vuelo> buscarVuelos(
             @RequestParam String origen,
@@ -37,4 +40,18 @@ public class VueloController {
     ){
         return vueloRepository.findByOrigenAndDestinoAndNumeroescalas(origen, destino, numEscalas);
     }
+
+    ///api/vuelos/buscar-por-destino?destino=Madrid
+    @GetMapping("/buscar-por-destino")
+    public List<Vuelo> buscarPorDestino(@RequestParam String destino){
+        return vueloRepository.findByDestino(destino);
+    }
+
+    ///api/vuelos/contar-por-origen?origen=Paris
+    @GetMapping("/contar-por-origen")
+    public Long contarVuelosPorOrigen(@RequestParam String origen){
+        return vueloRepository.countByOrigen(origen);
+    }
+
+
 }

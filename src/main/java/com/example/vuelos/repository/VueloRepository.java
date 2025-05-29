@@ -22,5 +22,9 @@ public interface VueloRepository extends JpaRepository<Vuelo, String> {
                              @Param("numEscalas") Integer numEscalas);
 
      */
+
+    List<Vuelo> findByDestino(String destino);
+
+    Long countByOrigen(String origen);
 }
 
